@@ -1,4 +1,14 @@
-// Функция для добавления новой задачи
+function createDeleteButton(li) {
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-button";
+    deleteButton.addEventListener("click", () => {
+        li.remove();
+        saveTasks();
+    });
+    return deleteButton;
+}
+
 function addTask() {
     const taskInput = document.getElementById("taskInput");
     const taskList = document.getElementById("taskList");
@@ -15,17 +25,11 @@ function addTask() {
         });
 
         const textNode = document.createTextNode(taskText);
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", () => {
-            li.remove();
-            saveTasks();
-        });
+        let deleteButton = createDeleteButton(li);
 
         li.appendChild(checkbox);
         li.appendChild(textNode);
-        li.appendChild(deleteButton);
+        li.appendChild(deleteButton)
 
         taskList.appendChild(li);
 
@@ -51,13 +55,7 @@ function renderTasks() {
         });
 
         const textNode = document.createTextNode(task.text);
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", () => {
-            li.remove();
-            saveTasks();
-        });
+        let deleteButton = createDeleteButton(li);
 
         li.appendChild(checkbox);
         li.appendChild(textNode);
